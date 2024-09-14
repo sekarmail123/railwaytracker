@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Railway Tracker PWA</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="manifest" href="/manifest.json">
+    <style>
+        #map {
+            height: 100vh;
+            width: 100%;
+        }
+        .user-location {
+            font-size: 16px;
+            font-weight: bold;
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <div class="user-location">Locating...</div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then(() => console.log('Service Worker Registered'))
+                .catch(error => console.error('Service Worker Registration failed', error));
+        }
+    </script>
+</body>
+</html>
