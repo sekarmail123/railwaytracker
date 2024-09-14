@@ -7,23 +7,47 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <link rel="manifest" href="manifest.json">
     <style>
-        #map {
-            height: 100vh;
-            width: 100%;
-        }
-        .user-location {
-            font-size: 16px;
-            font-weight: bold;
-            position: fixed;
-            bottom: 10px;
-            left: 10px;
-            background: rgba(255, 255, 255, 0.7);
-            padding: 5px;
+         body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
         }
 
+        /* Container for button and map */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+        }
+
+        /* Style for the refresh button */
+        .refresh-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 15px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            margin: 20px 0;
+        }
+
+        .refresh-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* The map should start below the button */
+        #map {
+            width: 100%;
+            height: calc(100% - 80px); /* 80px allows space for the refresh button */
+        }
+
+        /* Style for the GPS icon */
         .gps-icon {
             position: absolute;
-            top: 10px;
+            top: 80px;
             right: 10px;
             background-color: white;
             border: 2px solid #ccc;
@@ -33,15 +57,33 @@
             z-index: 1000;
         }
 
+        .user-location {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background-color: white;
+            padding: 5px;
+            font-family: Arial, sans-serif;
+            z-index: 1000;
+        }
 
     </style>
 </head>
 <body>
-    <div id="map"></div>
+    <div class="container">
+        <!-- Refresh Button -->
+        <button class="refresh-btn" onclick="location.reload()">Refresh</button>
+
+        <!-- The Map -->
+        <div id="map"></div>
+    </div>
+
+    <!-- GPS Icon -->
     <div class="gps-icon">
         <img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" alt="GPS" width="30" />
     </div>
 
+    <!-- User location display -->
     <div class="user-location">Locating...</div>
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
