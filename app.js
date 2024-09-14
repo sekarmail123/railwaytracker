@@ -12,32 +12,31 @@
  var currentPosition;
 
  function locateUser() {
-     if ("geolocation" in navigator) {
-         navigator.geolocation.watchPosition(position => {
-             const { latitude, longitude } = position.coords;
-             currentPosition = { latitude, longitude };
+    if ("geolocation" in navigator) {
+        navigator.geolocation.watchPosition(position => {
+            const { latitude, longitude } = position.coords;
+            currentPosition = { latitude, longitude };
 
-             if (userMarker) {
-                 // Update user marker position
-                 userMarker.setLatLng([latitude, longitude]);
-             } else {
-                 // Add user marker on first location fetch
-                 userMarker = L.marker([latitude, longitude]).addTo(map)
-                     .bindPopup("You are here").openPopup();
-             }
+            if (userMarker) {
+                // Update user marker position
+                userMarker.setLatLng([latitude, longitude]);
+            } else {
+                // Add user marker on first location fetch without popup
+                userMarker = L.marker([latitude, longitude]).addTo(map);
+            }
 
-             // Center map on user location
-             map.setView([latitude, longitude], 14);
+            // Center map on user location
+            map.setView([latitude, longitude], 14);
 
-             // Update UI with user location
-             document.querySelector('.user-location').innerHTML = `Lat: ${latitude}, Lon: ${longitude}`;
-         }, err => {
-             console.error(err);
-         });
-     } else {
-         alert("Geolocation is not supported by your browser.");
-     }
- }
+            // Update UI with user location
+            document.querySelector('.user-location').innerHTML = `Lat: ${latitude}, Lon: ${longitude}`;
+        }, err => {
+            console.error(err);
+        });
+    } else {
+        alert("Geolocation is not supported by your browser.");
+    }
+}
 
  // Call locateUser function to start tracking location
  locateUser();
