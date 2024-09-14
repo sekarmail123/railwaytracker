@@ -40,7 +40,6 @@
     <div id="map"></div>
     <div class="gps-icon">
         <img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" alt="GPS" width="30" />
-
     </div>
 
     <div class="user-location">Locating...</div>
@@ -49,7 +48,7 @@
     <script src="app.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/service-worker.js')
+            navigator.serviceWorker.register('service-worker.js')
                 .then(() => console.log('Service Worker Registered'))
                 .catch(error => console.error('Service Worker Registration failed', error));
         }
